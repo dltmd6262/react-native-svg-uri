@@ -91,40 +91,14 @@ class SvgUri extends Component{
     this.fetchSVGData         = this.fetchSVGData.bind(this);
 
     this.isComponentMounted   = false;
+  }
 
+  componentDidMount() {
     // Gets the image data from an URL or a static file
-    if (props.source) {
-      const source = resolveAssetSource(props.source) || {};
-      this.fetchSVGData(source.uri);
-    }
-  }
-
-  componentWillMount() {
     this.isComponentMounted = true;
-  }
-
-  static getDerivedStateFromProps(nextProps, state){
-    const newState = {};
-
-    if (nextProps.svgXmlData !== state.svgXmlData) {
-      Object.assign(newState, { svgXmlData: nextProps.svgXmlData });
-    }
-
-    if (nextProps.fill !== state.fill) {
-      Object.assign(newState, { fill: nextProps.fill });
-    }
-
-    return Object.keys(newState).length > 0 ? newState : null;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { source } = this.props;
-    if (source) {
-        const newSource = resolveAssetSource(source) || {};
-        const oldSource = prevState.source && resolveAssetSource(prevProps.source) || {};
-        if (newSource.uri !== oldSource.uri){
-          this.fetchSVGData(newSource.uri);
-        }
+    if (this.props.source) {
+      const source = resolveAssetSource(this.props.source) || {};
+      this.fetchSVGData(source.uri);
     }
   }
 
@@ -286,7 +260,7 @@ class SvgUri extends Component{
 
   render () {
     try {
-      if (this.state.svgXmlData == null) {
+      if (!this.state.svgXmlData) {
         return null;
       }
 
