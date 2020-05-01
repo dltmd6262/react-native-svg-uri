@@ -293,7 +293,9 @@ class SvgUri extends Component{
       const inputSVG = this.state.svgXmlData.substring(
         this.state.svgXmlData.indexOf("<svg "),
         (this.state.svgXmlData.indexOf("</svg>") + 6)
-      ).replace(/<!-(.*?)->/g, '');
+      ).replace(/<!-(.*?)->/g, '')
+      .replace(/<title>(.*?)<\/title>/g, '')
+      .replace(/<desc>(.*?)<\/desc>/g, '');
 
       const doc = new xmldom.DOMParser().parseFromString(inputSVG);
 
