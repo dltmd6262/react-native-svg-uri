@@ -113,7 +113,6 @@ class SvgUri extends Component{
       responseXML = await response.text();
     } catch(e) {
       error = e;
-      console.error("ERROR SVG", e);
     } finally {
       if (this.isComponentMounted) {
         this.setState({ svgXmlData: responseXML }, () => {
@@ -281,7 +280,6 @@ class SvgUri extends Component{
           </View>
       );
     } catch(e){
-      console.error("ERROR SVG", e);
       return null;
     }
   }
