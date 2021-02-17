@@ -273,13 +273,10 @@ class SvgUri extends Component{
       const doc = new xmldom.DOMParser({
 	      errorHandler: {
 		      warning:function(error) {
-		    console.log('[xmldom warning]\t'+error);
 			},
 			error:function(error) {
-			    console.log('[xmldom error]\t'+error);
 			},
 			fatalError:function(error) {
-			    console.log('[xmldom fatalError]\t'+error);
 			    throw error;
 			}
 	      }
