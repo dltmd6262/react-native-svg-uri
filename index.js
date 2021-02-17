@@ -270,7 +270,18 @@ class SvgUri extends Component{
       .replace(/<title>(.*?)<\/title>/g, '')
       .replace(/<desc>(.*?)<\/desc>/g, '');
 
-      const doc = new xmldom.DOMParser().parseFromString(inputSVG);
+      const doc = new xmldom.DOMParser({
+        warning:function(error) {
+		    console.warn('[xmldom warning]\t'+error);
+        },
+        error:function(error) {
+            console.warn('[xmldom error]\t'+error);
+        },
+        fatalError:function(error) {
+            console.warn('[xmldom fatalError]\t'+error);
+            throw error;
+        }
+      }).parseFromString(inputSVG);
 
       const rootSVG = this.inspectNode(doc.childNodes[0]);
 
